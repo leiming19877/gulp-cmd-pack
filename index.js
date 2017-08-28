@@ -222,7 +222,7 @@ function readDeps(option, parentDeps) {
  * amd define(function(require , exports , module){})
  * 
  */
-var DEFINE_REG=/define\(([^\[\]function\)]*?,)?(\[.*?\],)?(\s*function\s*\(.*?\)|.*?\))/;
+var DEFINE_REG=/define\((\s*[\"\']\w+[\"\']\s*,)?(\s*\[\w*\]\s*,)?(\s*function\s*\(.*?\)|\w+\))/;
 function comboContents(option) {
     var content = '';
     option.mods.forEach(function (mod) {
@@ -241,7 +241,6 @@ function comboContents(option) {
         if (mod.id) {
             define += '"' + mod.id + '" ,';
         }
-        debugger;
         define += deps;
         if (!DEFINE_REG.test(code)) {//标准commonjs模块
             define +=  ' function(require , exports , module){';
